@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">IMAGES UPLOADER</a>
+        {% if user.is_authenticated %}
+
+        <li class="nav-item navbar-nav ml-auto mt-2 mt-lg-0"">
+          <form method="post" action="{% url 'logoutform' %}">
+                  {% csrf_token %}
+              <button class="btn bg-dark text-white" type="submit">Logout</button>
+          </form>
+        </li>
+
+        {% else%}
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'loginform' %}">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signupform' %}">Signup</a>
+          </li>
+        </ul>
+        {% endif %}
+      </div>
+    </nav>
+
+    {% if user.is_authenticated%}
+    <h3 class="container-fluid">Welcome {{user}}</h3>
+    <div class="bg-secondary container">
+        <ul class="list-group">
+          <li class="list-group-item"><a href="{% url 'profile' %}">Profile</a></li>
+          <li class="list-group-item"><a href="{% url 'getphotos' %}">DashBoard</a></li>
+          <li class="list-group-item"><a href="{% url 'postphoto'%}">Create Album</a></li>
+        </ul>
+    </div>
+    {% else%}
+    <div class="jumbotron">
+      <h3 class="container text-center"> “Choose a job you love, and you will never have to work a day in your life."
+        —Confucius</h3>
+    </div>
+    {% endif %}
+
+  </body>
+
+</html>
