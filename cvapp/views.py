@@ -92,5 +92,3 @@ def profile(request):
 
 
 
-def nitin(request):
-    return 'nitin'
